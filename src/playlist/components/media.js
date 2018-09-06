@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import './media.css'
 
 class Media extends Component {
@@ -21,6 +22,16 @@ class Media extends Component {
       </div>
     )
   }
+}
+
+Media.propTypes = {
+  image: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  author: PropTypes.string,
+  type: PropTypes.oneOf(['video', 'audio'])
+}
+Media.defaultProps = {
+  title: 'titulo de respaldo'
 }
 
 export default Media
