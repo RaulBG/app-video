@@ -14,9 +14,9 @@ class Media extends Component {
     return (
       <div className="Media">
         <div>
-          <img src="./images/covers/bitcoin.jpg" alt="" width={260} height={160} />
-          <h3>¿Por qué aprender React?</h3>
-          <p>raulfbgomez</p>
+          <img src={this.props.image} alt="" width={260} height={160} />
+          <h3>{this.props.title}</h3>
+          <p>{this.props.author}</p>
         </div>
       </div>
     )
