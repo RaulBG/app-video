@@ -8,6 +8,7 @@ import VideoPlayerControls from '../components/video-player-controls'
 import ProgressBar from '../components/progress-bar'
 import Spinner from '../components/spinner'
 import Volume from '../components/volume'
+import FullScreen from '../components/full-screen'
 
 class VideoPlayer extends Component {
   state = {
@@ -53,9 +54,25 @@ class VideoPlayer extends Component {
   handleVolumeChange = event => {
     this.video.volume = event.target.value
   }
+  handleFullScreenClick = event => {
+    if (document.mozFullScreen) {
+      document.mozCancelFullScreen()
+    } else if (document.webkitIsFullScreen) {
+      document.webkitExitFullscreen()
+    } else if (this.player.mozRequestFullScreen) {
+      this.player.mozRequestFullScreen()
+    } else if (this.player.webkitRequestFullscreen) {
+      this.player.webkitRequestFullscreen()
+    }
+  }
+  setRef = element => {
+    this.player = element
+  }
   render () {
     return (
-      <VideoPlayerLayout>
+      <VideoPlayerLayout
+        setRef={this.setRef}
+      >
         <Title 
           title="Video pro"
         />
@@ -75,6 +92,9 @@ class VideoPlayer extends Component {
           />
           < Volume 
             handleVolumeChange={this.handleVolumeChange}
+          />
+          <FullScreen 
+            handleFullScreenClick={this.handleFullScreenClick} 
           />
         </VideoPlayerControls>
         <Spinner 
